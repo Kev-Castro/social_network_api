@@ -45,28 +45,18 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // Delete a student and remove them from the course
-    async deleteStudent(req, res) {
+    // Delete a user and remove them
+    async deleteUser(req, res) {
         try {
-            const student = await Student.findOneAndRemove({ _id: req.params.studentId });
+            const user = await User.findOneAndRemove({ _id: req.params.userId });
 
-            if (!student) {
-                return res.status(404).json({ message: 'No such student exists' })
+            if (!user) {
+                return res.status(404).json({ message: 'No such user exists' })
             }
 
-            const course = await Course.findOneAndUpdate(
-                { students: req.params.studentId },
-                { $pull: { students: req.params.studentId } },
-                { new: true }
-            );
+            await Thought.deleteMany({ _id: { $in: user.thoughts } });
 
-            if (!course) {
-                return res.status(404).json({
-                    message: 'Student deleted, but no courses found',
-                });
-            }
-
-            res.json({ message: 'Student successfully deleted' });
+            res.json({ message: 'User successfully deleted' });
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
