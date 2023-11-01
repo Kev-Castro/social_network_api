@@ -120,7 +120,7 @@ module.exports = {
         }
     },
     // Delete reaction from a thought
-    async removeReaction(req, res) {
+    async deleteReaction(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
