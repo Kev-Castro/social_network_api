@@ -85,22 +85,22 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // Remove assignment from a student
-    async removeAssignment(req, res) {
+    // Remove friend from a user
+    async removeFriend(req, res) {
         try {
-            const student = await Student.findOneAndUpdate(
-                { _id: req.params.studentId },
-                { $pull: { assignment: { assignmentId: req.params.assignmentId } } },
-                { runValidators: true, new: true }
+            const user = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $pull: { friends: req.params.friendId } },
+                { new: true }
             );
 
-            if (!student) {
+            if (!user) {
                 return res
                     .status(404)
-                    .json({ message: 'No student found with that ID :(' });
+                    .json({ message: 'No user found with that ID :(' });
             }
 
-            res.json(student);
+            res.json(user);
         } catch (err) {
             res.status(500).json(err);
         }
