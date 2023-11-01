@@ -10,17 +10,17 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // Get a course
-    async getSingleCourse(req, res) {
+    // Get a thought
+    async getSingleThought(req, res) {
         try {
-            const course = await Course.findOne({ _id: req.params.courseId })
+            const thought = await Thought.findOne({ _id: req.params.thoughtId })
                 .select('-__v');
 
-            if (!course) {
-                return res.status(404).json({ message: 'No course with that ID' });
+            if (!thought) {
+                return res.status(404).json({ message: 'No thought with that ID' });
             }
 
-            res.json(course);
+            res.json(thought);
         } catch (err) {
             res.status(500).json(err);
         }
