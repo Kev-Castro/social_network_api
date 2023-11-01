@@ -63,24 +63,24 @@ module.exports = {
         }
     },
 
-    // Add an assignment to a student
-    async addAssignment(req, res) {
+    // Add an friend to a user
+    async addFriend(req, res) {
         try {
-            console.log('You are adding an assignment');
+            console.log('You are adding an friend');
             console.log(req.body);
-            const student = await Student.findOneAndUpdate(
-                { _id: req.params.studentId },
-                { $addToSet: { assignments: req.body } },
-                { runValidators: true, new: true }
+            const user = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $addToSet: { friends: req.params.friendId } },
+                { new: true }
             );
 
-            if (!student) {
+            if (!user) {
                 return res
                     .status(404)
-                    .json({ message: 'No student found with that ID :(' })
+                    .json({ message: 'No user found with that ID :(' })
             }
 
-            res.json(student);
+            res.json(user);
         } catch (err) {
             res.status(500).json(err);
         }
