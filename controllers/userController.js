@@ -8,7 +8,7 @@ module.exports = {
         try {
             const users = await User.find();
             const userObj = {
-                users,
+                users
             };
             return res.json(userObj);
         } catch (err) {
@@ -16,20 +16,20 @@ module.exports = {
             return res.status(500).json(err);
         }
     },
-    // Get a single student
-    async getSingleStudent(req, res) {
+    // Get a single user
+    async getSingleUser(req, res) {
         try {
-            const student = await Student.findOne({ _id: req.params.studentId })
+            const user = await User.findOne({ _id: req.params.userId })
                 .select('-__v')
-                .lean();
+                .populate('friends')
+                .populate('thoughts');
 
-            if (!student) {
-                return res.status(404).json({ message: 'No student with that ID' });
+            if (!user) {
+                return res.status(404).json({ message: 'No user with that ID' });
             }
 
             res.json({
-                student,
-                grade: await grade(req.params.studentId),
+                user
             });
         } catch (err) {
             console.log(err);
