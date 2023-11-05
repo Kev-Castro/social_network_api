@@ -60,5 +60,5 @@ The License used for this webpage is the MIT license.
 - Within all of these sections they have objects. 
     - They can all be shown, looked up by ID, Created, Updated, and Deleted. 
 ---
-LETS SEARCH, ADD, UPDATE AND DELETE SOME USERS, THOUGHTS, FRIENDS, AND REACTOINS! 
+LETS SEARCH, ADD, UPDATE AND DELETE SOME USERS, THOUGHTS, FRIENDS, AND REACTIONS! 
 ---
